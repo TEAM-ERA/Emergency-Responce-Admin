@@ -1,5 +1,9 @@
 // Your web app's Firebase configuration
+<<<<<<< HEAD
 const firebaseConfig = /* PASTE YOUR FIREBASE CONFIG HERE */
+=======
+const firebaseConfig = /* PASTE YOUR FIREBASE CONFID OBJECT HERE */
+>>>>>>> 2cdf8dfb84f30aaec591a9539c6d6d0633db2eec
 
 // register service wroker
 if ('serviceWorker' in navigator) {
