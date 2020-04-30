@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <%- include('partials/meta.ejs') %> 
+    <%- include('partials/icons_and_fonts.ejs') %> 
+    <%- include('partials/core_styles.ejs') %>
+    <style>
+        .preloader-wrapper.small {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            top: 4px;
+            left: -10px;
+            display: none;
+        }
+        .preloader-wrapper.small .spinner-layer {
+            border-color: #c91819 !important;
+        }
+    </style>
+</head>
+<!-- END: Head-->
+
+<body
+    class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   "
+    data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+    <%- include('partials/header.ejs') %> 
+    <%- include('partials/sidenav.ejs') %>
+
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+        <div class="row">
+            <div class="content-wrapper-before p-dark-bg "></div>
+            <div class="col s12 p-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div class=" animate fadeRight transparent no-shadow">
+                                <div class="card-content pb-0 pt-2">
+                                    <h5 class="primary-text margin page-title">
+                                        <i class="material-icons mr-1" style="font-size: 32px;">message</i>
+                                        <%- title %>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div id="input-fields" class="card">
+                                <div class="card-content padding-1" style="overflow: auto;">
+                                    <div id="view-input-fields" class="active">
+                                        <div class="row" style="width: 100%;margin: 0px;">
+                                            <div class="col s12">
+                                                <br />
+                                                <form id="frmAddHealthTips">
+                                                    <div class="row">
+                                                        <span hidden id="tipId"><%- tipId %></span>
+                                                        <div class="col s12 m12 l9 pt-1">
+                                                            <div class="input-field update-input ml-0 mr-0">
+                                                                <i class="material-icons prefix">event_note</i>
+                                                                <input value="<%- tip.title %>" required name="tips_topic" id="tips_topic" type="text"
+                                                                    class="validate mb-0" />
+                                                                <label for="tips_topic">Add Title Here...</label>
+                                                            </div>
+                                                            <div class="col s12 mt-3  pr-0 pl-0">
+                                                                <div class="input-field">
+                                                                    <textarea required style="height: 15rem;border-radius: 6px;"
+                                                                        class="padding-2" name="tips_desc" id="tips_desc"
+                                                                        cols="2122" rows="100"><%- tip.description %></textarea>
+                                                                    <label class="ml-2" for="tips_desc">Add Body Here...</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--Side Bar for the meta data-->
+                                                        <div class="col s12 m12 l3 pt-1">
+                                                          <div class="border-1 pr-3 pl-3 pt-3 pb-3 mt-0 mb-5">
+                                                            <h6 class="mb-5 border-bottom-1 pb-2">
+                                                              Publish
+                                                            </h6>
+                                                            <div class="pb-5">
+                                                              <div class=" pt-3">
+                                                                <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                                                  class="material-icons">remove_red_eye</i>
+                                                                Status:
+                                                                <span class="bold"><%- post_status %></span>
+                                                              </div>
+                                                              <div class="pt-3">
+                                                                <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                                                  class="material-icons">access_time</i>
+                                                                Published time : 
+                                                                <span class="bold"><%- moment(tip.time.toDate()).format('LLL')  %></span>
+                                                              </div>
+                                                              <div class=" pt-3">
+                                                                <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                                                  class="material-icons">edit</i>
+                                                                State:
+                                                                <span class="bold"><%- post_state %></span>
+                                                              </div>
+                                                              <div class="pt-3">
+                                                                <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                                                  class="material-icons">access_time</i>
+                                                                Publish time : 
+                                                                <span class="bold publish-time"></span>
+                                                              </div>
+                                                            </div>
+                                                            <div class="center">
+                                                                <button id="btnPublish" type="submit"
+                                                                class="btn waves-effect waves-light p-dark-bg mt-2 mb-2">
+                                                                <div class="preloader-wrapper small active">
+                                                                    <div class="spinner-layer spinner-red-only">
+                                                                        <div class="circle-clipper left">
+                                                                            <div class="circle"></div>
+                                                                        </div>
+                                                                        <div class="gap-patch">
+                                                                            <div class="circle"></div>
+                                                                        </div>
+                                                                        <div class="circle-clipper right">
+                                                                            <div class="circle"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><span>Publish</span> 
+                                                                </button>
+                                                            </div>
+                                                            <div class="error-msg">
+                                                                <span class="icon">
+                                                                    <i style="position: relative;font-size: 24px;"
+                                                                        class="material-icons">error_outline</i>
+                                                                </span>
+                                                                <span class="code">Error Title</span>
+                                                                <p class="details" >Error message</p>
+                                                                <p class="solution" >Error message</p>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!--Allert container-->
+  <div class="alerts-container"></div>
+  <audio id="alertsound">
+    <source src="app-assets/sound/1.mp3" type="audio/mpeg">
+  </audio>
+    <!-- END: Page Main-->
+        <!-- Modal -->
+        <div class="modal prompt">
+            <div class="modal-content">
+                <h1 class="mb-0 center-align">
+                    <i class="material-icons mr-1 green-text center-align"
+                        style="font-size: 100px;border: 5px #3e8e41 solid;border-radius: 50%;">
+                        done
+                    </i>
+                </h1>
+                <h4 class="mb-0 center-align">
+                    Published
+                </h4>
+                <p class="mb-0 center-align">Health Tip Updated Successfully</p>
+                <p class="mb-0 center-align">Keep Editing?</p>
+            </div>
+            <div class="modal-footer center-align">
+                <a href="#"
+                    class="btn-small modal-action modal-close waves-effect btn-flat green white-text">Yes</a>
+                <a href="/health-tips" id="btn_no"
+                    class="btn-small modal-action modal-close waves-effect btn-flat red white-text">No, Thanks</a>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    <%- include('partials/core_scripts.ejs') %>
+    <script src="/app-assets/js/health-tips/publish-health-tip.js"></script>
+</body>
+
+</html>

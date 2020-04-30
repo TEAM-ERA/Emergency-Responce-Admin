@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<head>
+    <%- include('partials/meta.ejs') %>
+    <%- include('partials/icons_and_fonts.ejs') %>
+    <%- include('partials/core_styles.ejs') %>
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/login.css">
+    <style>
+        .input-field .input-field-border{
+            height: 45px;
+        }
+        .input-field .prefix{
+            top: 0px !important;
+        }
+        .preloader-wrapper.small {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            top: 4px;
+            left: -10px;
+            display: none;
+        }
+        .preloader-wrapper.small .spinner-layer {
+            border-color: white !important;
+        }
+    </style>
+</head>
+<!-- END: Head-->
+
+<body
+    class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page"
+    data-open="click" data-menu="vertical-modern-menu" data-col="1-column">
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                <div id="login-page" class="row">
+                    <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+                        <form id="frmLogin" class="login-form">
+                            <div class="row">
+                                <div class="col s12">
+                                    <div style="opacity: 1;transform: translateY(0px);width: 150px;margin: 10px auto 0px;">
+                                        <img src="/app-assets/images/logo/logo.png" alt="logo" width="100%" height="100%">
+                                    </div>
+                                    <h4 style="text-align: center;">Sign in</h4>
+                                    <p style="text-align: center;">Login as an admin now !</p>
+                                </div>
+                            </div>
+                            <div class="row margin">
+                                <div class="input-field input-field-border col s12">
+                                    <i class="material-icons prefix pt-2">person_outline</i>
+                                    <input id="username" type="text" class="mb-0" required>
+                                    <label for="username" class="center-align">Username</label>
+                                </div>
+                            </div>
+                            <div class="row margin">
+                                <div class="input-field input-field-border col s12">
+                                    <i class="material-icons prefix pt-2">lock_outline</i>
+                                    <input id="password" type="password" class="mb-0"  minlength="8" required>
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 m-0 p-0">
+                                    <div class="error-msg">
+                                        <span class="icon">
+                                            <i style="position: relative;font-size: 24px;"
+                                                class="material-icons">error_outline</i>
+                                        </span>
+                                        <span class="code m-0">Error Title</span>
+                                        <p class="details m-0" >Error message</p>
+                                        <p class="solution m-0" >please try again</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="submit" type="submit"
+                                        class="btn waves-effect waves-light border-round gradient-45deg-red-deep-orange col s12">
+                                        <div class="preloader-wrapper small active">
+                                            <div class="spinner-layer spinner-red-only">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span>Login</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6 m6 l6">
+                                    <p class="margin"><a href="/register">Dont have account? Signup Now!</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="content-overlay"></div>
+        </div>
+    </div>
+
+    <%- include('partials/core_scripts.ejs') %>
+    <script src="app-assets/js/authentification/auth.js"></script>
+</body>
+</html>

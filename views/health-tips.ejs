@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+  <%- include('partials/meta.ejs') %>
+  <%- include('partials/icons_and_fonts.ejs') %>
+  <%- include('partials/core_styles.ejs') %>
+  <link rel="stylesheet" type="text/css" href="/app-assets/plugins/calender/calender.css">
+  <style>
+    .load {
+    -webkit-animation: rotation 1s infinite linear;
+    }
+
+    @-webkit-keyframes rotation {
+      from {
+      -webkit-transform: rotate(0deg);
+      }
+      to {
+      -webkit-transform: rotate(359deg);
+      }
+    }
+  </style>
+</head>
+<!-- END: Head-->
+
+<body
+  class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   "
+  data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+
+  <%- include('partials/header.ejs') %>
+
+  <%- include('partials/sidenav.ejs') %>
+
+  <!-- BEGIN: Page Main-->
+  <div id="main">
+    <div class="row">
+      <div class="content-wrapper-before p-dark-bg "></div>
+      <div class="col s12 p-0">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class=" animate fadeRight transparent no-shadow">
+                <div class="card-content pb-0 pt-2">
+                  <h5 class="primary-text margin page-title">
+                    <i class="material-icons mr-1" style="font-size: 32px;">message</i>
+                    <%- title %>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--List header-->
+          <div class="breadcrumbs-dark pb-0 pt-0 mt-1" id="breadcrumbs-wrapper">
+            <!-- Search for small screen-->
+            <div class="container" style="position: relative;">
+              <div class="row">
+                <div class="col s12 m9 l9">
+                  <div class="width-100">
+                    <div class="row m-5px search ">
+                      <div class="col s10 m10 l10 p-0">
+                          <input id="txtSearch" class="z-depth-2 pl-2 mr-2" type="text" name="search"
+                              placeholder="Search">
+                      </div>
+                      <div class="col s2 m2 l2 p-0 relative center-align" style="top: 7px;">
+                          <a href="#!">
+                              <i class="material-icons">search</i>
+                          </a>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="col s12 m3 l3">
+                  <a onclick="loadTipsData()" class="reload btn-floating p-accent-bg m-5px waves-effect waves-light ">
+                    <i class="material-icons">loop</i>
+                  </a>
+                  <a class="p-accent-bg relative inline btn waves-effect waves-light right" href="add-health-tip"
+                    style="top: 7px;">
+                    <span>Add New</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--List Starts-->
+          <div class="row">
+            <div id="tips-container" class="col s12 m8 l8 margin">
+              <div class="loader-circle">
+                <div class="preloader-wrapper normal active">
+                  <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+
+                  <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+
+                  <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                  <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="error-loading-msgBox">Error loading...
+                <p class="m-0">Check internet connection and <a onclick="loadTipsData()" href="JavaScript:void(0)"><u>try again</u></a></p>
+              </div>
+            </div>
+            <!--List the the First Aid-->
+            <div class="col s12 m4 l4 margin">
+              <%- include('partials/sidebar.ejs') %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Allert container-->
+  <div class="alerts-container"></div>
+  <audio id="alertsound">
+    <source src="app-assets/sound/1.mp3" type="audio/mpeg">
+  </audio>
+  <!-- END: Page Main-->
+  <!-- Modal -->
+  <div id="confirmDelete" class="modal prompt">
+    <div class="modal-content">
+      <h1 class="mb-0 center-align">
+        <i class="material-icons mr-1 red-text center-align" style="font-size: 100px;">info_outline</i>
+      </h1>
+      <h4 class="mb-0 center-align">
+        Are you sure?
+      </h4>
+      <p class="mb-0 center-align">You will not be able to recover this event</p>
+    </div>
+    <div class="modal-footer center-align">
+      <a id="btnDelete" class="btn-small modal-action modal-close waves-effect btn-flat red white-text">Delete</a>
+      <a id="#!" class="btn-small modal-action modal-close waves-effect btn-flat green white-text">Cancel</a>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div id="readMore" class="modal">
+    <div class="modal-header">
+      <span style="text-align: center" class="left waves-effect waves-light inline modal-trigger ml-0 mr-1">
+        <a id="edit" class="waves-effect waves-light inline" href="#">
+          <i class="material-icons ">edit</i>Edit
+        </a>
+      </span>
+      <span style="text-align: center;" class="left red-text waves-effect waves-light inline modal-trigger ml-2 mr-1">
+        <a id="delete" class="waves-effect waves-light inline" href="">
+          <i class="material-icons red-text">delete_forever</i>Delete
+        </a>
+      </span>
+      <span style="width: 32px;text-align: center;" class="red right waves-effect waves-light inline modal-close m-0"
+        href="#readMore">
+        <i class="material-icons white-text">close</i>
+      </span>
+    </div>
+    <div class="modal-content">
+      <h5 class="title mb-1">
+        Loading
+      </h5>
+      <span class="author red-text">
+        <i class="material-icons">person</i>
+        Loading
+      </span>
+      <span class="time ml-2">
+        <i class="material-icons">access_time</i>
+        Loading
+      </span>
+      <p style="font-size:18px;word-wrap: break-word;white-space: pre-wrap;   " class="description mb-0"></p>
+    </div>
+  </div>
+  <!-- Modal -->
+  <%- include('partials/core_scripts.ejs') %>
+  <script   src="/app-assets/plugins/calender/calender.js"></script>
+  <script src="app-assets/js/health-tips/health-tips.js"></script>
+  <script>
+  </script>
+</body>
+
+</html>

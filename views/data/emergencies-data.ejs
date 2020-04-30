@@ -1,0 +1,28 @@
+<div class="animate fadeRight">
+    <!--List the the First Aid-->
+    <ul class="collection">
+        <% querySnapshot.forEach(doc => { %>
+        <li data-id="<%= doc.id %>" style="min-height: auto !important;position: relative;" class="collection-item avatar">
+            <a href="/first-aid-details?id=<%= doc.id %>">
+                <img src="<%= doc.data().icon %>" alt="" class="circle">
+                <h5 id="title"  style="font-size: 18px;" class=" title"> <%= doc.data().title %> </h5>
+            </a>
+            <div class="actions">
+                <a class="waves-effect waves-light inline btnReadmore" href="/first-aid-details?id=<%= doc.id %>">
+                    <i class="material-icons green-text">remove_red_eye</i>
+                </a>
+                <a id="edit" class="waves-effect waves-light inline"
+                    href="/edit-first-aid?id=<%= doc.id %>">
+                    <i class="material-icons ">edit</i>
+                </a>
+                <a id="delete" class="waves-effect waves-light inline" href="<%= doc.id %>">
+                    <i class="material-icons red-text">delete_forever</i>
+                </a>
+            </div>
+        </li>
+        <% }) %>
+        <li id="no-results" style="min-height: 100px !important;position: relative; text-align: center;" class="collection-item hide">
+            <h5 style="margin-top: 35px !important;font-size: 18px;" class="title"> No matching documents found. </h5>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+  <%- include('partials/meta.ejs') %> <%-
+    include('partials/icons_and_fonts.ejs') %> <%-
+    include('partials/core_styles.ejs') %>
+  <link rel="stylesheet" type="text/css" href="/app-assets/vendors/dropify/css/dropify.min.css" />
+  <style>
+    .step-num::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      bottom: 22px;
+      right: -5px;
+      background: #6b6f82;
+      -webkit-transform: rotate(136deg);
+      transform: rotate(136deg);
+    }
+
+    #steps .step-item .step-num {
+      background: #6b6f82;
+      text-align: center;
+      width: 20px;
+      height: 35px;
+      font-size: x-large;
+      position: absolute;
+      left: 5%;
+      color: white;
+    }
+
+    .step-item {
+      width: 98% !important;
+      float: right;
+      align-items: center;
+      margin: 10px auto;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 
+      0 3px 1px -2px rgba(0,0,0,.12),
+      0 1px 5px 0 rgba(0,0,0,.2)
+    }
+
+    .step {
+      position: relative !important;
+    }
+
+    .ml-15 {
+      margin-left: 15% !important;
+    }
+
+    .upload-icon .dropify-wrapper .dropify-wrapper {
+      height: 100px !important;
+    }
+
+    .dropify-wrapper .dropify-wrapper {
+      height: 135px !important;
+    margin: auto;
+    }
+    .preloader-wrapper.small {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            top: 4px;
+            left: -10px;
+            display: none;
+        }
+        .preloader-wrapper.small .spinner-layer {
+            border-color: white !important;
+        }
+        .dropify-wrapper.touch-fallback .dropify-message {
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+    padding: 0px 0
+}
+.dropify-wrapper{
+  height: 105px !important;
+}
+
+  </style>
+</head>
+<!-- END: Head-->
+
+<body
+  class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   "
+  data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+  <%- include('partials/header.ejs') %> <%-
+    include('partials/sidenav.ejs') %>
+
+  <!-- BEGIN: Page Main-->
+  <div id="main">
+    <div class="row">
+      <div class="content-wrapper-before p-dark-bg "></div>
+      <div class="col s12 p-0">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class=" animate fadeRight transparent no-shadow">
+                <div class="card-content pb-0 pt-2">
+                  <h5 class="primary-text margin page-title">
+                    <i class="material-icons mr-1" style="font-size: 32px;">healing</i>
+                    Add Health Tips
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <div id="input-fields" class="card">
+                <div class="card-content padding-1" style="overflow: auto;">
+                  <div id="view-input-fields" class="active">
+                    <div class="row" style="width: 100%;margin: 0px;">
+                      <div class="col s12"><br>
+                        <form id="frmAddFirstAid">
+                          <div class="row">
+                            <div class="col s12 m12 l9 pt-1">
+                              <div class="input-field update-input ml-0 mr-0">
+                                <i class="material-icons prefix">event_note</i>
+                                <input required name="em_title" id="em_title" type="text" class="validate mb-0 valid">
+                                <label for="em_title" class="active">Add Title</label>
+                              </div>
+                              <ul id="steps" class="ml-5 mr-5 pt-3 pb-10 mt-0 align-items-center">
+                                <li id="0" class="row step-item">
+                                  <span class="step-num">1</span>
+                                  <div class="col s12">
+                                    <div class="input-field">
+                                      <textarea required style="border-radius: 6px; " class="padding-2" name="step_title"
+                                        id="step_title" rows="5" cols="100%"></textarea>
+                                      <label class="ml-2" for="step_desc">Add Step Detail</label>
+                                    </div>
+                                  </div>
+                                  <div class="col s12 right-align">
+                                    <a class="red-text remove-step mouse-pointer">
+                                      <i class="material-icons prefix"
+                                        style="position: relative; top: 4px; font-size: 16px">remove_circle</i>
+                                      Remove
+                                    </a>
+                                  </div>
+                                </li>
+                              </ul>
+                              <div class="red-text col s12 center-align mb-10" id="add-step"
+                                style="position: relative;cursor: pointer;">
+                                <i class="material-icons prefix" style="position: relative; top: 6px;">add_circle</i>
+                                Add Step
+                              </div>
+                            </div>
+                            <!--Side Bar for the meta data-->
+                            <div class="col s12 m12 l3 pt-1">
+                              <div class="border-1 pr-3 pl-3 pt-3 pb-3 mt-0 mb-5">
+                                <h6 class="mb-5 border-bottom-1 pb-2">
+                                  Publish
+                                </h6>
+                                <div class="pb-5">
+                                  <div class=" pt-3">
+                                      <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                          class="material-icons">remove_red_eye</i>
+                                      Status:
+                                      <span class="bold"><%- post_status %></span>
+                                  </div>
+                                  <div class=" pt-3">
+                                      <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                          class="material-icons">edit</i>
+                                      State:
+                                      <span class="bold"><%- post_state %></span>
+                                  </div>
+                                  <div class="pt-3">
+                                      <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                          class="material-icons">access_time</i>
+                                      Publish time :
+                                      <span class="bold publish-time"></span>
+                                  </div>
+                              </div>
+                                <div class="center">
+                                    <button id="btnPublish" type="submit"
+                                    class="btn waves-effect waves-light p-dark-bg mt-2 mb-2">
+                                    <div class="preloader-wrapper small active">
+                                        <div class="spinner-layer spinner-white-only">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div><span>Publish</span> 
+                                    </button>
+                                </div>
+                                <div class="error-msg">
+                                  <span class="icon">
+                                      <i style="position: relative;font-size: 24px;"
+                                          class="material-icons">error_outline</i>
+                                  </span>
+                                  <span class="code">Error Title</span>
+                                  <p class="details" >Error message</p>
+                                  <p class="solution" >Error message</p>
+                                </div>
+                              </div>
+
+                              <div class="upload-icon border-1 pr-3 pl-3 pt-3 pb-3 mt-0 mb-5">
+                                <h6 class="mb-5 border-bottom-1 pb-2">
+                                  Featured Icon
+                                </h6>
+                                <input id="em_icon" name="em_icon" type="file" accept="image/*" 
+                                  class="dropify" data-default-file="" data-height="100" data-max-file-size="5M"/>
+                              </div>
+
+                              <div class="border-1 pr-3 pl-3 pt-3 pb-3 mt-0 mb-5">
+                                <h6 class="mb-5 border-bottom-1 pb-2">
+                                  Featured Illustration
+                                </h6>
+                                <input id="fileIllustration" name="fileIllustration" type="file" accept="image/*,video/*" 
+                                class="dropify" data-default-file="" data-height="100" data-max-file-size="5M"/>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Allert container-->
+  <div class="alerts-container"></div>
+  <audio id="alertsound">
+    <source src="app-assets/sound/1.mp3" type="audio/mpeg">
+  </audio>
+  <!-- END: Page Main-->
+  <!-- Modal -->
+  <div class="modal prompt">
+      <div class="modal-content">
+          <h1 class="mb-0 center-align">
+              <i class="material-icons mr-1 green-text center-align"
+                  style="font-size: 100px;border: 5px #3e8e41 solid;border-radius: 50%;">
+                  done
+              </i>
+          </h1>
+          <h4 class="mb-0 center-align">
+              Published
+          </h4>
+          <p class="mb-0 center-align">Emergency case added Succesfully</p>
+          <p class="mb-0 center-align">Add another emergency?</p>
+      </div>
+      <div class="modal-footer center-align">
+          <a href="/add-first-aid" id="btnResetForm"
+              class="btn-small modal-action modal-close waves-effect btn-flat green white-text">Yes, Add health
+              tip</a>
+          <a href="/first-aid" id="btn_no"
+              class="btn-small modal-action modal-close waves-effect btn-flat red white-text">No,I'm Done</a>
+      </div>
+  </div>
+  <!-- Modal -->
+
+  <!-- END: Page Main-->
+  <%- include('partials/core_scripts.ejs') %>
+  <script src="app-assets/js/emergencies/publish-case.js"></script>
+  <script src="/app-assets/vendors/dropify/js/dropify.min.js"></script>
+  <script src="/app-assets/js/emergencies/form-file-uploads.min.js"></script>
+</body>
+
+</html>

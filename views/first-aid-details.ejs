@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+  <%- include('partials/meta.ejs') %> <%-
+    include('partials/icons_and_fonts.ejs') %> <%-
+    include('partials/core_styles.ejs') %>
+    <link rel="stylesheet" type="text/css" href="/app-assets/plugins/calender/calender.css">
+  <style>
+    .step-number {
+      position: absolute;
+      left: 5px;
+      top: 0px;
+      display: inline-block;
+      overflow: hidden;
+      width: 42px;
+      height: 42px;
+      vertical-align: middle;
+      background: #e6e6e6;
+      border-radius: 50%;
+      padding-top: 10px;
+      text-align: center;
+      font-size: x-large;
+    }
+
+    /* Set the size of the div element that contains the map */
+    .collection .collection-item.avatar {
+      border: none;
+      padding-left: 60px;
+    }
+    .preloader-wrapper.small {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            top: 4px;
+            left: -10px;
+            display: none;
+        }
+        .preloader-wrapper.small .spinner-layer {
+            border-color: white !important;
+        }
+  </style>
+</head>
+<!-- END: Head-->
+
+<body
+  class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   "
+  data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+  <%- include('partials/header.ejs') %> <%-
+    include('partials/sidenav.ejs') %>
+
+  <!-- BEGIN: Page Main-->
+  <div id="main">
+    <div class="row">
+      <div class="content-wrapper-before p-dark-bg "></div>
+      <div class="col s12 p-0">
+        <div class="container">
+          <!--Post Deails-->
+          <div class="row">
+            <div class="col s12 m8 l8 ">
+              <div class="card">
+                <!--Use this as the IMG-->
+                <div class=" " style="height: auto;">
+                  <img style="min-height: 50px;" src="<%- illustration %>" width="100%" height="300px" alt="first aid image" />
+                  <a style="position: absolute;left: 10px;top: 10px;padding: 0 10px;border-radius: 50px;" class="btnBack p-accent-bg btn waves-effect waves-light">
+                    <i class="material-icons bold">arrow_back</i>
+                  </a>
+                  <div class="pl-2 pr-2 pt-0 pb-2 m-0" style="position: relative">
+                    <h4 class="mr-10"><%= doc.title %></h4>
+                    <a style="position: absolute;right: 10px;top: 7px;" class="dropdown-settings" href="#!" data-target="dropdown1">
+                      <i class="material-icons right black-text">more_vert</i>
+                    </a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                      <li tabindex="0">
+                        <a href="/edit-first-aid?id=<%= id %>" class="mouse-pointer green-text pl-5 pr-5">
+                          <i class="material-icons green-text mr-2">edit</i>
+                          Update
+                        </a>
+                      </li>
+                      <li tabindex="0">
+                        <a href="<%= id %>" id="btnDelete" class="mouse-pointer red-text pl-5 pr-5">
+                          <i class="material-icons red-text mr-2">delete_forever</i>
+                          Delete
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div style="height: auto;">
+                  <!--List the the First Aid steps-->
+                  <ul class="collection mt-0" style="border: none;padding:0px 10px;">
+                    <% steps.forEach(doc => { %>
+                    <% ++stepNum %>
+                    <li class=" collection-item avatar ">
+                      <span class="step-number"><%- stepNum %></span>
+                      <p style="font-size: 18px;" class="title mb-2">
+                        <%- doc.data().description %>
+                      </p>
+                    </li>
+                    <% }) %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--Side Nav-->
+            <div class="col s12 m4 l4 ">
+              <%- include('partials/sidebar.ejs') %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Page Main-->
+  <!-- Modal -->
+  <div id="confirmDelete" class="modal prompt">
+    <div class="modal-content">
+      <h1 class="mb-0 center-align">
+        <i class="material-icons mr-1 red-text center-align" style="font-size: 100px;">info_outline</i>
+      </h1>
+      <h4 class="mb-0 center-align">
+        Are you sure?
+      </h4>
+      <p class="mb-0 center-align">You will not be able to recover this event</p>
+    </div>
+    <div class="modal-footer center-align">
+      <a id="btnDelete" class="btn-small modal-action waves-effect btn-flat red white-text">
+        <div class="preloader-wrapper small active">
+          <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                  <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                  <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                  <div class="circle"></div>
+              </div>
+          </div>
+      </div>
+      <span>Delete</span> 
+      </a>
+      <a id="#!" class="btn-small modal-action modal-close waves-effect btn-flat green white-text">Cancel</a>
+    </div>
+  </div>
+  <!-- Modal -->
+  <%- include('partials/core_scripts.ejs') %>
+  <script   src="/app-assets/plugins/calender/calender.js"></script>
+  <script src="app-assets/js/emergencies/emergency_case.js"></script>
+</body>
+
+</html>

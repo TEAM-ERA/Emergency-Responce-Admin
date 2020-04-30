@@ -1,0 +1,37 @@
+<%if (!querySnapshot.size == 0) { %>
+<% querySnapshot.forEach(doc => { %>
+<div class="chat-list">
+  <div data-target="chat-sidenav" data-reporter="<%= doc.data().uid %>" data-id="<%= doc.id %>" id="<%= doc.id %>"
+    data-target="chat-sidenav" class="chat-user">
+    <div class="user-section">
+      <div class="row valign-wrapper">
+        <div class="col s2 media-image away pr-0">
+          <img src="<%= doc.data().reporterImage %>" alt="" class="circle z-depth-2 responsive-img">
+        </div>
+        <div class="col s10">
+          <p id="displayName" class="m-0 blue-grey-text text-darken-4 font-weight-700"><%= doc.data().reporterName %>
+          </p>
+          <p class="m-0 info-text"><%= doc.data().emergency %></p>
+        </div>
+      </div>
+    </div>
+    <div class="info-section" style="position: absolute;right: 10px;">
+      <div class="star-timing">
+        <div id="displaytime" class="time">
+          <span><%= moment(new Date(doc.data().time.toDate())).fromNow() %></span>
+        </div>
+      </div>
+      <%if (!doc.data().isResponded) { %>
+      <span id="displayStat" class="badge badge pill red">Not Responded</span>
+      <% } else { %>
+      <span id="displayStat" class="badge badge pill green">Responded</span>
+      <% } %>
+    </div>
+  </div>
+</div>
+<% }) %>
+<% } else { %>
+<div class="no-data-found" style="display: block !important;">
+  <h6 class="center">No Results Found</h6>
+</div>
+<% } %>

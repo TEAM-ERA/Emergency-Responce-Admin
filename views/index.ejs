@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+   <%- include('partials/meta.ejs') %> <%-
+    include('partials/icons_and_fonts.ejs') %> <%-
+    include('partials/core_styles.ejs') %>
+   <link rel="stylesheet" type="text/css" href="/app-assets/plugins/calender/calender.css">
+   <style>
+      a {
+         color: #6b6f82;
+      }
+
+      .collection .collection-item.avatar .secondary-content {
+         position: absolute;
+         right: 0px;
+      }
+
+      .recent-post .collection .collection-item:not(.avatar) {
+         min-height: auto;
+         padding: 5px;
+      }
+
+      .recent-post .collection .avatar {
+         min-height: auto;
+         padding-left: 55px;
+      }
+
+      .recent-post .collection {
+         border: none;
+      }
+
+      .recent-post .collection .collection-item:hover,
+      .recent-post .collection .collection-item:active {
+         background-color: #f0f0f0;
+      }
+
+      .recent-post .collection li {
+         padding-right: 5px;
+      }
+
+      .recent-post.emergencies .circle {
+         top: 0px;
+         padding: 4px;
+         background: transparent;
+      }
+
+      .recent-post.emergencies li {
+         top: 0px;
+      }
+
+      .recent-post .card-content {
+         position: relative;
+      }
+
+      .recent-post .collection .collection-item.avatar:not(.circle-clipper)>.circle {
+         left: 0;
+         background: transparent;
+      }
+
+      .dummy .heading {
+         height: 1.2rem;
+         background: #e0e0e0 !important;
+      }
+
+      .width-80 {
+         width: 80%;
+      }
+
+      .dummy .text {
+         height: 1.2rem;
+         width: 50%;
+         background: #e6e6e6 !important;
+      }
+
+      .dummy .text.small {
+         height: 0.9rem;
+         width: 50%;
+         background: #eeeeee !important;
+      }
+
+      .dummy .text.smaller {
+         height: 0.7rem;
+         width: 40%;
+         background: #efefef !important;
+      }
+
+      .recent-post .collection li.dummy {
+         min-height: 45px !important;
+         border: none !important;
+      }
+
+      .recent-post .collection li.dummy:hover,
+      .recent-post .collection li.dummy:active {
+         background-color: transparent !important;
+      }
+
+      .dummy .background-round {
+         height: 42px;
+         width: 42px;
+         background: #e6e6e6 !important;
+      }
+
+      .dummy .secondary-content {
+         height: 16px !important;
+         width: 16px !important;
+         top: 0px !important;
+      }
+   </style>
+</head>
+<!-- END: Head-->
+
+<body
+   class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   "
+   data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+   <%- include('partials/header.ejs') %> <%-
+    include('partials/sidenav.ejs') %>
+
+   <!-- BEGIN: Page Main-->
+   <div id="main">
+      <div class="row">
+         <div class="content-wrapper-before p-dark-bg "></div>
+         <div class="col s12">
+            <div class="row">
+               <div class="col s12 m12 l12">
+                  <div class=" animate fadeRight transparent no-shadow">
+                     <div class="card-content pb-0 pt-2" style="padding-left: 60px;">
+                        <span class="avatar-contact avatar-online " style="position: absolute; left: 0px;">
+                           <img class="circle shadow border-1" width="50px" height="50px"
+                              src="/app-assets/images/icon/admin-white.png" alt="avatar" />
+                        </span>
+                        <h5 class="primary-text margin page-title">
+                           <%- greeting %>,
+                           <span style="font-size: 30px;"><%- admin.name %></span>
+                        </h5>
+                        <p class="grey-text text-lighten-5 margin page-title" style="vertical-align: middle;">
+                           <i class="material-icons mr-1" style="font-size: 18px; top: 3px;position: relative;">
+                              event
+                           </i>
+                           <%- moment().format('LLLL') %>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="container">
+               <div class="section">
+                  <div class="row">
+                     <div class="col s12 m4 l4">
+                        <div class="card pr-3 pl-3 pt-3 pb-3">
+                           <h6 class="header mb-5 border-bottom-1 pb-2">
+                              Ermengency Response Admin
+                           </h6>
+                           <div class="pb-3">
+                              <div>
+                                 <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                    class="material-icons">notifications_active</i>
+                                 <span>Get Real time reports from clients</span>
+                              </div>
+                              <div>
+                                 <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                    class="material-icons">person_pin_circle</i>
+                                 <span>Get realtime location of the reporter</span>
+                              </div>
+                              <div>
+                                 <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                    class="material-icons">healing</i>
+                                 <span>Respond to the emergency case</span>
+                              </div>
+                              <div>
+                                 <i style="position: relative; top: 3.5px; font-size: 20px;"
+                                    class="material-icons">mood</i>
+                                 <span>Save a life</span>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Recent Reports -->
+                        <div id="recent-reports">
+                           <div class="card recent-post emergencies dummy animate fadeUp">
+                              <div class="card-content">
+                                 <h4 class="card-title mb-0">
+                                    <div class="heading"></div>
+                                 </h4>
+                                 <ul class="collection mb-0">
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                       <div href="#!" class="secondary-content background-round"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                       <div href="#!" class="secondary-content background-round"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                       <div href="#!" class="secondary-content background-round"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                       <div href="#!" class="secondary-content background-round"></div>
+                                    </li>
+                                 </ul>
+                                 <div class="background-round btn-floating halfway-fab"></div>
+                              </div>
+                              <div class="card-action">
+                                 <div class="text"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col s12 m4 l4">
+                        <!-- Recent Tips -->
+                        <div id="recent-tips">
+                           <div class="card recent-post dummy animate fadeUp">
+                              <div class="card-content">
+                                 <h4 class="card-title mb-0">
+                                    <div class="heading"></div>
+                                 </h4>
+                                 <ul class="collection mb-0">
+                                    <li class="collection-item dummy">
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                    </li>
+                                    <li class="collection-item dummy">
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                    </li>
+                                    <li class="collection-item dummy">
+                                       <div class="heading width-80"></div>
+                                       <div class="text small mt-1"></div>
+                                       <div class="text smaller mt-1"></div>
+                                    </li>
+                                 </ul>
+                                 <div class="background-round btn-floating halfway-fab"></div>
+                              </div>
+                              <div class="card-action">
+                                 <div class="text"></div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Recent emergencies -->
+                        <div id="recent-emergencies">
+                           <div class="card recent-post emergencies dummy animate fadeUp">
+                              <div class="card-content">
+                                 <h4 class="card-title mb-0">
+                                    <div class="heading"></div>
+                                 </h4>
+                                 <ul class="collection mb-0">
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                    </li>
+                                    <li class="collection-item avatar dummy">
+                                       <div class="background-round circle"></div>
+                                       <div class="heading width-80"></div>
+                                    </li>
+                                 </ul>
+                                 <div class="background-round btn-floating halfway-fab"></div>
+                              </div>
+                              <div class="card-action">
+                                 <div class="text"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col s12 m4 l4">
+                        <!-- Sidebar -->
+                        <%- include('partials/sidebar.ejs') %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <%- include('partials/footer.ejs') %>
+   <!-- END: Page Main-->
+   <!--Allert container-->
+   <div class="alerts-container"></div>
+   <audio id="alertsound">
+      <source src="app-assets/sound/1.mp3" type="audio/mpeg">
+   </audio>
+   <!-- END: Page Main-->
+   <%- include('partials/core_scripts.ejs') %>
+   <script src="/app-assets/plugins/calender/calender.js"></script>
+   <script src="app-assets/js/dashboard/dashboard.js"></script>
+   <script>
+      $(".tap-target").tapTarget();
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<div class="card recent-post animate fadeUp">
+    <div class="card-content">
+       <h4 class="card-title mb-0 activator">
+          Recent Health Tips Posts
+          <i class="material-icons float-right">more_vert</i>
+       </h4>
+       <ul class="collection mb-0 pr-2">
+        <% const docs = querySnapshot.docs; let count = 0; %>
+        <% for (const doc of docs) { %>
+          <li class="collection-item">
+             <p class="font-weight-600"><%= doc.data().title %></p>
+             <p class="description mt-0 cut-text"><%- doc.data().description %></p>
+             <p class="ultra-small"><%= moment(new Date(doc.data().time.toDate())).format('LL') %></p>
+          </li>
+          <% ++count; %>
+          <% if (count == 2) break; %>
+        <% } %>
+       </ul>
+       <a href="/add-health-tip" class="btn-floating halfway-fab waves-effect waves-light red"> <i class="material-icons">add</i>
+       </a>
+    </div>
+    <div class="card-reveal" style="display: none; transform: translateY(0%);">
+        <span class="card-title grey-text text-darken-4">Health Tips<i class="material-icons right">close</i>
+        </span>
+        <div class="card-content center-align">
+            <h3 class="background-round" style="width: 75px;height: 75px;margin: auto;">
+                <b><%- querySnapshot.size %></b>
+            </h3>
+            <p>Total Posts</p>
+            <p class="mt-3"><a class="green-text" href="/health-tips">View All Posts</a></p>
+            <p class="mt-3"><a class="red-text" href="/add-health-tip">Add New Post</a></p>
+          </div>
+      </div>
+    <div class="card-action">
+       <a href="/health-tips">View All Posts >></a>
+    </div>
+ </div>

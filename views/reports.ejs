@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+  <%- include('partials/meta.ejs') %>
+  <%- include('partials/icons_and_fonts.ejs') %>
+  <%- include('partials/core_styles.ejs') %>
+  <!-- BEGIN: Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-chat.min.css">
+  <!-- END: Custom CSS-->
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .load {
+      -webkit-animation: rotation 1s infinite linear;
+    }
+
+    @-webkit-keyframes rotation {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+
+      to {
+        -webkit-transform: rotate(359deg);
+      }
+    }
+
+    .tabs .tab a {
+      padding: 0 15px;
+    }
+
+    #load-data {
+      background: #ffffffcf;
+    }
+
+    .overlay {
+      display: block;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      z-index: 5;
+      border-radius: 24px;
+    }
+
+    .default-display {
+      align-items: center;
+      box-sizing: border-box;
+      flex-grow: 1;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      cursor: default;
+      padding-bottom: 28px;
+      padding-top: 28px;
+    }
+
+    .default-display div {
+      text-align: center;
+      margin: auto;
+      max-width: 460px;
+      width: 80%;
+    }
+
+    .not-response {
+      position: absolute !important;
+      top: 53% !important;
+      left: 7% !important;
+      height: 10px !important;
+      min-width: 10px !important;
+      padding: 0px !important;
+      margin: 0px !important;
+    }
+
+    .input-icons {
+      position: relative;
+      right: 33px;
+    }
+
+    .loc-footer {
+      overflow-y: auto;
+    }
+
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: calc(100vh - 50vh);
+      /* The height is 400 pixels */
+      width: 100%;
+      /* The width is the width of the web page */
+    }
+  </style>
+</head>
+<!-- END: Head-->
+
+<body>
+  <%- include('partials/header.ejs') %>
+  <%- include('partials/sidenav.ejs') %>
+  <!-- BEGIN: Page Main-->
+  <div id="main">
+    <div class="content-wrapper-before p-dark-bg "></div>
+    <div class="col s12">
+      <div class="container">
+        <div class="chat-application">
+          <div class="app-chat">
+            <div class="content-area content-right">
+              <div class="app-wrapper">
+                <div class="card card card-default scrollspy border-radius-6 fixed-width mb-0"
+                  style="box-shadow: none;border: 1px solid #B0BEC5;">
+                  <div class="card-content chat-content p-0">
+                    <!-- Sidebar Area -->
+                    <div class="sidebar-left sidebar-fixed animate fadeUp animation-fast">
+                      <div class="sidebar animate fadeUp">
+                        <div class="sidebar-content">
+                          <div id="sidebar-list" class="sidebar-menu chat-sidebar list-group position-relative">
+                            <div class="sidebar-list-padding app-sidebar sidenav" id="chat-sidenav">
+                              <!-- Sidebar Header -->
+                              <div class="sidebar-header">
+                                <div class="row valign-wrapper">
+                                  <div class="col s2 media-image pr-0">
+                                    <i style="margin-left: 0px;"
+                                      class="material-icons go-back sidenav-trigger">arrow_back</i>
+                                  </div>
+                                  <div class="col s10">
+                                    <p class="m-0 blue-grey-text text-darken-4 font-weight-700"
+                                      style="font-size: 28px;">Reports</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--/ Sidebar Header -->
+
+                              <!-- Sidebar Search -->
+                              <div class="sidebar-search animate fadeUp">
+                                <div class="search-area">
+                                  <i class="material-icons search-icon">search</i>
+                                  <input id="txtSearch" type="text" placeholder="Search by: name, time, status..." class="app-filter"
+                                    id="chat_filter">
+                                </div>
+                                <div>
+                                  <a class="reload btn-floating grey darken-2 m-5px waves-effect waves-light">
+                                    <i class="material-icons load">loop</i>
+                                  </a>
+                                </div>
+                              </div>
+                              <!--/ Sidebar Search -->
+
+                              <!-- Sidebar Content List -->
+                              <div id="report-list" class="sidebar-content sidebar-chat">
+                                <div id="" class="chat-list">
+                                  <div class="loader-circle">
+                                    <div class="preloader-wrapper normal active">
+                                      <div class="spinner-layer spinner-blue">
+                                        <div class="circle-clipper left">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                          <div class="circle"></div>
+                                        </div>
+                                      </div>
+
+                                      <div class="spinner-layer spinner-red">
+                                        <div class="circle-clipper left">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                          <div class="circle"></div>
+                                        </div>
+                                      </div>
+
+                                      <div class="spinner-layer spinner-yellow">
+                                        <div class="circle-clipper left">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                          <div class="circle"></div>
+                                        </div>
+                                      </div>
+                                      <div class="spinner-layer spinner-green">
+                                        <div class="circle-clipper left">
+                                          <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                          <div class="circle"></div>
+                                        </div>
+
+                                        <div class="circle-clipper right">
+                                          <div class="circle"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--/ Sidebar Content List -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/ Sidebar Area -->
+
+
+                    <!-- Content Area -->
+                    <div id="reportDetailsSection" class="chat-content-area animate fadeUp">
+                      <!-- Chat header -->
+                      <div class="chat-header">
+                        <div class="row valign-wrapper">
+                          <!-- Sidebar menu for small screen -->
+                          <a style="z-index: 10000;" href="#" data-target="chat-sidenav"
+                            class=" mr-0 sidenav-trigger hide-on-large-only">
+                            <i class="material-icons font-weight-700" style="font-size: 36px;">people</i>
+                          </a>
+                          <!--/ Sidebar menu for small screen -->
+                          <div class="col media-image online pr-0 default-hide" style="padding-left: 20px;">
+                            <!-- Clients or users picture -->
+                            <img id="reporterImage" src="/app-assets/images/icon/admin.png" alt=""
+                              class="circle z-depth-2 responsive-img">
+                          </div>
+
+                          <!-- Clients or users name -->
+                          <div class="col pr-0 default-hide" style="padding-left: 5px;">
+                            <p id="userName" class="m-0 blue-grey-text text-darken-4 font-weight-700">Loading...</p>
+                            <p id="caseSummary" class="m-0 chat-text truncate">Loading...</p>
+                          </div>
+
+                        </div>
+                        <!--Tabs and options-->
+                        <ul class="right tabs"
+                          style="width: fit-content;margin: 0;height: fit-content; position: absolute;right: 5px;">
+                          <li class="tab col s4 p-0">
+                            <a id="e-case-tab" href="#e-case" class="active">
+                              <i class="material-icons" style="vertical-align: middle;">local_hospital</i>
+                            </a>
+                          </li>
+                          <li class="tab col s4 p-0 ">
+                            <a href="#chat" class="">
+                              <i class="material-icons" style="vertical-align: middle;">chat</i>
+                            </a>
+                          </li>
+                          <li class="tab col s4 p-0">
+                            <a href="#location" class="location-triger">
+                              <i class="material-icons" style="vertical-align: middle;">location_on</i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <!--/ Chat header -->
+                      <!--tabs-->
+                      <div class="tab-content">
+                        <div id="load-data" class="overlay col s12">
+                          <div class="loader-circle" style="position:relative; top: 45%;">
+                            <div class="preloader-wrapper normal active">
+                              <div class="spinner-layer spinner-blue">
+                                <div class="circle-clipper left">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                  <div class="circle"></div>
+                                </div>
+                              </div>
+
+                              <div class="spinner-layer spinner-red">
+                                <div class="circle-clipper left">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                  <div class="circle"></div>
+                                </div>
+                              </div>
+
+                              <div class="spinner-layer spinner-yellow">
+                                <div class="circle-clipper left">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                  <div class="circle"></div>
+                                </div>
+                              </div>
+                              <div class="spinner-layer spinner-green">
+                                <div class="circle-clipper left">
+                                  <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                  <div class="circle"></div>
+                                </div>
+
+                                <div class="circle-clipper right">
+                                  <div class="circle"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <div id="default" class="overlay col s12">
+                        <div class="mr-5 ml-5" style=" position: relative; top: 20%;">
+                          <div class="default-display">
+                            <div>
+                              <div style="opacity: 1; transform: translateY(0px);">
+                                <img src="/app-assets/images/logo/logo.png" alt="logo" width="50%" height="50%">
+                              </div>
+                              <div style="opacity: 1; transform: translateY(0px);">
+                                <h5>Emergency Reports</h5>
+                                <p>
+                                  Click on a report in the list to see details and respond to it.
+                                  If you are on a mobile device, click on the icon on above to select the report.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="e-case" class="tab-item col s12" style="display: block;">
+                        <div class="card mr-5 ml-5">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s12" style="display: block !important;">
+                                <span hidden id="curReportID"></span>
+                                <span hidden id="reporterID"></span>
+                                <table class="striped">
+                                  <tbody>
+                                    <!-- Emergency Case-->
+                                    <tr>
+                                      <td>Reporter:</td>
+                                      <td id="reporter" class="users-view-username">Loading...</td>
+                                    </tr>
+                                    <!-- Emergency Case-->
+                                    <tr>
+                                      <td>Emergency Case:</td>
+                                      <td id="emCase" class="users-view-username">Loading...</td>
+                                    </tr>
+                                    <!-- Emergency Time of Report-->
+                                    <tr>
+                                      <td>Time of Report:</td>
+                                      <td id="reportTime" class="users-view-name">Loading...</td>
+                                    </tr>
+                                    <!--Emergency Current Location-->
+                                    <tr>
+                                      <td>Location:</td>
+                                      <td id="emLoc" class="users-view-name">Loading...</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Status</td>
+                                      <td id="reportStatus" class="users-view-name">Loading...</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- </div> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div id="chat" class=" tab-item col s12" style="display: none;">
+                        <!-- Chat content area -->
+                        <div class="chat-area">
+                          <div class="chats">
+                            <div class="chats">
+                              <div class="chat-date-wrapper"><span class="chat-date">Today</span></div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/ Chat content area -->
+                        <!-- Chat footer <-->
+                        <div class="chat-footer mb-0">
+                          <form onsubmit="enterChat();" action="javascript:void(0);" class="chat-input">
+                            <input type="text" placeholder="Type message here.." class="message">
+                            <!--/ Sidebar menu for small screen -->
+                            <a class="btn waves-effect waves-light send p-dark-bg " style="padding: 20px;"
+                              onclick="enterChat();">
+                              <i class="material-icons mr-2" style="position: absolute;top: 4px;left: 11px;">send</i>
+                            </a>
+                          </form>
+                        </div>
+                        <!--/ Chat footer -->
+                      </div>
+                      <div id="location" class=" tab-item col s12" style="display: none;">
+                        <!-- map -->
+                        <div id="map"></div>
+                        <!--/ map -->
+                        <!-- map footer <-->
+                        <div class="loc-footer">
+                          <div class="card mr-5 ml-5">
+                            <div class="card-content" style="padding: 10px;">
+                              <table class="striped">
+                                <tbody>
+                                  <!-- Emergency Case-->
+                                  <tr>
+                                    <td style="padding: 3px; width: 20%;"> <b>Current Location (A)</b> </td>
+                                    <td style="padding: 3px;" class="" id="curLoc" class="users-view-username">None
+                                    </td>
+                                  </tr>
+                                  <!-- Emergency Case-->
+                                  <tr>
+                                    <td style="padding: 3px; width: 20%;"> <b>Victim's Location (B)</b> </td>
+                                    <td style="padding: 3px;" class="" id="VitLoc" class="users-view-username">None
+                                    </td>
+                                  </tr>
+                                  <!-- Emergency Time of Report-->
+                                  <tr>
+                                    <td style="padding: 3px; width: 20%;"> <b>Matrix</b></td>
+                                    <td style="padding: 3px; color: #cc1e1e;" class="" id="matrix"
+                                      class="users-view-name">None</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!-- </div> -->
+                            </div>
+                          </div>
+                        </div>
+                        <!--/ map footer -->
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ Content Area -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <!-- END: Page Main-->
+    <!--Allert container-->
+    <div class="alerts-container"></div>
+    <audio id="alertsound">
+      <source src="app-assets/sound/1.mp3" type="audio/mpeg">
+    </audio>
+    <!-- END: Page Main-->
+
+  <%- include('partials/core_scripts.ejs') %>
+  <!-- BEGIN PAGE LEVEL JS-->
+  <!-- reference Moment.js library -->
+  <script src="app-assets/js/reports/report.js"></script>
+  <script src="app-assets/js/scripts/app-chat.min.js"></script>
+  <script src="app-assets/js/maps.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADG_z7x8gfMUWhsJsTmu288t14gS1f7LI&callback=initMap"
+    defer></script>
+  <!-- END PAGE LEVEL JS-->
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<div class="animate fadeRight">
+    <ul id="tips" class="update-list">
+        <% querySnapshot.forEach(doc => { %>
+        <li class="update-list-item card pt-1" data-id=" <%= doc.id %>">
+            <div class="row update-container m-0">
+                <div class="col width-100 p-0">
+                    <div class="row" style="border-bottom: 1px #e0e0e0 solid;">
+                        <div class="col s7 meta pr-0" style="position: relative;top: 3px;">
+                            <span class="author red-text pl-0 m-0 col s6">
+                                <i class="material-icons">person</i>
+                                <span><%= doc.data().author %></span> 
+                            </span>
+                            <span class="time p-0 m-0 col s6">
+                                <i class="material-icons">access_time</i>
+                                <span><%= moment(new Date(doc.data().time.toDate())).format('LL') %></span>
+                            </span>
+                        </div>
+                        <div class="col s5 pr-1">
+                            <div class="actions">
+                                <a id="edit" class="waves-effect waves-light inline"
+                                    href="/edit-health-tip?id=<%= doc.id %>">
+                                    <i class="material-icons ">edit</i>
+                                </a>
+                                <a class="waves-effect waves-light inline btnReadmore" href="#!">
+                                    <i class="material-icons green-text">remove_red_eye</i>
+                                </a>
+                                <a id="delete" class="waves-effect waves-light inline" href="<%= doc.id %>">
+                                    <i class="material-icons red-text">delete_forever</i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-body block width-100">
+                        <h5 class="font-weight-700 mb-1"><%= doc.data().title %></h5>
+                        <p class="description mt-0 cut-text"><%- doc.data().description %></p>
+                        <a class="red-text btnReadmore" href="#">
+                            Read More >> 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <% }) %>
+        <li id="no-results" class="card pt-1 hide" style="height: 100px; text-align: center;">
+            <h5 style="margin-top: 35px !important;font-size: 18px;" class="title"> No matching documents found. </h5>
+        </li>
+    </ul>
+</div>
