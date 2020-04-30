@@ -17,7 +17,7 @@ const authentification = require('./controllers/authentification');
 const firstAid = require('./controllers/first-aid');
 const notification = require('./controllers/notification');
 const serviceAccount = require(
-    './config/dsc-uew-k-1b5d3-firebase-adminsdk-h1osy-b8d2b9f3e9.json',
+    './config/credentials.json',
 );
 // decalre contants for the session
 const SESSION_AGE = 1000 * 60 * 60 * 24;

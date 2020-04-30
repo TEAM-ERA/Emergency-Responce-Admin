@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 let map;
 let infoWindow;
 let marker;
