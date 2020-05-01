@@ -76,7 +76,7 @@ app.use((req, res, next) => {
     next();
     return 0;
   } else {
-    firebaseAdmin.auth().verifyIdToken(idToken)
+    admin.auth().verifyIdToken(idToken)
         .then((decodedIdToken) => {
           console.log(decodedIdToken.admin);
           // Check custom claims to confirm user is an admin.
