@@ -5,7 +5,7 @@ const path = require('path');
 const uuid = require('uuid-v4');
 
 const storage = new Storage({
-  projectId: 'dsc-uew-k-1b5d3',
+  projectId: /*PASTE YOUR FIREBASE Project ID*/,
   keyFilename: path.join(__dirname, '../../config/dsc-uew-k-1b5d3-firebase-adminsdk-h1osy-b8d2b9f3e9.json'),
 });
 
@@ -221,7 +221,7 @@ const uploadImageToStorage = (file, reference) => {
       reject(error);
     }
     // Get storage bucket
-    const bucket = storage.bucket('dsc-uew-k-1b5d3.appspot.com');
+    const bucket = storage.bucket(/*PASTE YOUR FIREBASE STORAGE NAME*/);
     const newFileName = reference + '/' + file.originalname;
 
     const fileUpload = bucket.file(newFileName);
@@ -240,7 +240,7 @@ const uploadImageToStorage = (file, reference) => {
 
     blobStream.on('finish', (e) => {
       // The public URL can be used to directly access the file via HTTP.
-      const url = 'https://firebasestorage.googleapis.com/v0/b/' + bucket.name + '/o/' + encodeURIComponent(fileUpload.name) + '?alt=media&token=' + uuidToken;
+      const url = 'http://storage.googleapis.com/' + bucket.name + '/' + fileUpload.name;
       resolve(url);
     });
     blobStream.end(file.buffer);
