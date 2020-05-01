@@ -1,11 +1,15 @@
+require('dotenv').config();
 const ejs = require('ejs');
 const multer = require('multer');
 const {Storage} = require('@google-cloud/storage');
 const path = require('path');
 const uuid = require('uuid-v4');
 
+const projectid = process.env.PROJECTID;
+const storageBucket = process.env.STORAGE_BUCKECT;
+
 const storage = new Storage({
-  projectId: /*PASTE YOUR FIREBASE Project ID*/,
+  projectId: projectid,
   keyFilename: path.join(__dirname, '../../config/credentials.json'),
 });
 
@@ -221,7 +225,7 @@ const uploadImageToStorage = (file, reference) => {
       reject(error);
     }
     // Get storage bucket
-    const bucket = storage.bucket(/*PASTE YOUR FIREBASE STORAGE NAME*/);
+    const bucket = storage.bucket(storageBucket);
     const newFileName = reference + '/' + file.originalname;
 
     const fileUpload = bucket.file(newFileName);
@@ -269,6 +273,6 @@ const uploadSteps = function(reference, steps) {
  */
 async function deleteFiles(path) {
   // Deletes the file from the bucket
-  const bucket = storage.bucket('dsc-uew-k-1b5d3.appspot.com');
+  const bucket = storage.bucket(storageBucket);
   return bucket.deleteFiles({prefix: path});
 }
