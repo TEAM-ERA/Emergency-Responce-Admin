@@ -9,7 +9,7 @@ const socket = require('socket.io');
 const cookieParser = require('cookie-parser');
 const MemcachedStore = require('connect-memcached')(session);
 const bodyParser = require('body-parser');
-const firebaseAdmin = require('firebase-admin');
+const admin = require('firebase-admin');
 const dashboard = require('./controllers/dashboard');
 const reports = require('./controllers/reports');
 const healthTips = require('./controllers/health-tips');
@@ -39,11 +39,8 @@ const sessionMiddleware = session({
   }),
 });
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount),
-  databaseURL: 'https://dsc-uew-k-1b5d3.firebaseio.com',
-  storageBucket: 'gs://dsc-uew-k-1b5d3.appspot.com',
-});
+/*PASTE YOUR FIRE INIT CODE HERE*/
+
 /*
  *creating instances of express
  */
@@ -110,11 +107,9 @@ io.use(sharedsession(sessionMiddleware));
 /*
  *fire controllers
  */
-authentification(app, firebaseAdmin);
-dashboard(app, firebaseAdmin);
-reports(app, firebaseAdmin, server, io);
-healthTips(app, firebaseAdmin);
-firstAid(app, firebaseAdmin);
-notification.init(app, firebaseAdmin);
-
-
+authentification(app, admin);
+dashboard(app, admin);
+reports(app, admin, server, io);
+healthTips(app, admin);
+firstAid(app, admin);
+notification.init(app, admin);
