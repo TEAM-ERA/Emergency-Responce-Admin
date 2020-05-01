@@ -10,9 +10,9 @@ A web tool that helps emergency unit to receive and respond to emergency cases r
 * Open with favorite editor
 * Open your terminal and navigate to the project directly
 * Run the command **npm install** to install all the dependencies needed to run the tool
-
-
-**Adding firebase to the project**
+  
+**Adding firebase to the project**  
+  
 **Note: The firebase project must the same as the  
 Emergency Response Assistance:Mobile App**  
 * Add a web app in your firebase console.
@@ -24,6 +24,6 @@ Emergency Response Assistance:Mobile App**
 * Copy your firebase client configuration file and paste it in **[public/firebase-messaging-sw.js](public/firebase-messaging-sw.js) line 4** and **[public/app-assets/js/config.js](public/app-assets/js/config.js) line 2**
 * Lastly, get your Google Map API key and paste it in **[view/report.ejs](view/report.ejs) line 462**
 
-**Running the App**
+**Running the App**  
 Run the command **node server.js** to start the server
 Visit **http://localhost:3000/** in your browser. 
