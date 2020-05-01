@@ -6,7 +6,7 @@ const uuid = require('uuid-v4');
 
 const storage = new Storage({
   projectId: /*PASTE YOUR FIREBASE Project ID*/,
-  keyFilename: path.join(__dirname, '../../config/dsc-uew-k-1b5d3-firebase-adminsdk-h1osy-b8d2b9f3e9.json'),
+  keyFilename: path.join(__dirname, '../../config/credentials.json'),
 });
 
 const upload = multer({
