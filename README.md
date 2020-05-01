@@ -12,9 +12,9 @@ A web tool that helps emergency unit to receive and respond to emergency cases r
 * Run the command **npm install** to install all the dependencies needed to run the tool
   
 **Adding firebase to the project**  
-  
-**Note: The firebase project must the same as the  
-Emergency Response Assistance:Mobile App**  
+Create a new project in firebase and name it **Emergency Responce Assistance**  if you have created it yet.
+**Note:** The firebase project must the same as the  
+Emergency Response Assistance:Mobile App
 * Add a web app in your firebase console.
 * Generate a new private key for you web project. A json file will be downloaded.
 * Open the json file and move the content to **[config/credentials.json](config/credentials.json)**  
